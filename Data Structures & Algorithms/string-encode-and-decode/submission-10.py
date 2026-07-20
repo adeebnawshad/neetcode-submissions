@@ -1,0 +1,22 @@
+class Solution:
+
+    def encode(self, strs: List[str]) -> str:
+        # 5#Hello5#World
+        res = []
+        for s in strs:
+            res.append(str(len(s)))
+            res.append('#')
+            res.append(s)
+        return ''.join(res)
+        # space complexity? What if we didn't use .join()? Is # an ASCII character?
+    def decode(self, s: str) -> List[str]:
+        res = []
+        i = 0
+        while i < len(s):
+            j = i
+            while s[j] != '#':
+                j += 1
+            length = int(s[i : j])
+            res.append(s[j + 1 : j + 1 + length])
+            i = j + 1 + length
+        return res
